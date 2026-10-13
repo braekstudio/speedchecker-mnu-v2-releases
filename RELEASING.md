@@ -9,6 +9,8 @@
 
 The download page needs no change. Its button always gives the newest release.
 
+About a minute after publishing, GitHub hides all older releases by itself (it turns them into drafts, which only you can see). Nothing is deleted: open a draft and publish it again to bring it back. This is done by `.github/workflows/hide-old-releases.yml`.
+
 Two things keep that working:
 
 - The APK must have the same file name in every release (GitHub shows it as `SpeedChecker.mnu.v2.apk`).
