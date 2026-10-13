@@ -1,0 +1,31 @@
+# Keeps only the newest release public. Every time a release is published,
+# all older ones are turned back into drafts: hidden from the public, still
+# kept in the repository, and publishable again at any time.
+name: Hide old releases
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hide:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Turn every release except the newest into a draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          latest=$(gh api "repos/$REPO/releases/latest" --jq .tag_name)
+          echo "Newest release: $latest"
+          gh release list --repo "$REPO" --exclude-drafts --limit 1000 --json tagName --jq '.[].tagName' |
+          while read -r tag; do
+            if [ "$tag" != "$latest" ]; then
+              echo "Hiding $tag"
+              gh release edit "$tag" --repo "$REPO" --draft=true
+            fi
+          done
