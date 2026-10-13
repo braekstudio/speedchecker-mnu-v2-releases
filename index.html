@@ -21,8 +21,6 @@
 
   * { box-sizing: border-box; }
 
-  html, body { height: 100%; }
-
   body {
     margin: 0;
     min-height: 100vh;
@@ -30,7 +28,6 @@
     color: var(--paper);
     font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
     padding: 48px 20px;
     position: relative;
@@ -42,9 +39,12 @@
     background-color: var(--ink);
   }
 
+  /* Centred when there is room; starts at the top when the page is taller
+     than the screen, so nothing is cut off. */
   .stage {
     width: 100%;
     max-width: 480px;
+    margin: auto;
   }
 
   .back {
@@ -105,14 +105,16 @@
   }
 
   .wordmark {
+    flex: 1;
+    min-width: 0;
     font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
     font-weight: 900;
-    font-size: clamp(26px, 7.4vw, 36px);
+    font-size: clamp(19px, 5.8vw, 36px);
     line-height: 1;
     letter-spacing: -0.01em;
     margin: 0;
     color: var(--paper);
-    text-wrap: balance;
+    overflow-wrap: anywhere;
   }
 
   .wordmark span {
@@ -234,9 +236,15 @@
     font-weight: 700;
   }
 
+  @media (max-width: 480px) {
+    body { padding: 24px 16px; }
+    .brand { gap: 12px; }
+    .brand img { width: 64px; height: 64px; border-radius: 14px; }
+  }
+
   @media (max-width: 380px) {
     .card { padding: 32px 22px 26px; }
-    .brand img { width: 68px; height: 68px; }
+    .brand img { width: 56px; height: 56px; }
     .stat-value { font-size: 12.5px; }
   }
 </style>
