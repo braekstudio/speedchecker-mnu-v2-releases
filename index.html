@@ -47,6 +47,19 @@
     max-width: 480px;
   }
 
+  .back {
+    display: inline-block;
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .back:hover { color: var(--paper); }
+  .back:focus-visible { outline: 3px solid var(--electro); outline-offset: 3px; }
+
   .card {
     position: relative;
     background: linear-gradient(180deg, var(--panel), var(--ink-deep));
@@ -231,6 +244,7 @@
 <body>
 
 <div class="stage">
+  <a class="back" href="https://braekstudio.github.io/">&larr; All apps</a>
   <div class="card">
     <p class="eyebrow">Free · Android APK</p>
     <div class="brand">
